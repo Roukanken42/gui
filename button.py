@@ -74,13 +74,11 @@ class Button (gui.Base):
        
     def _onMouseButtonUp  (self, event, toplayer):
         if not self.pressed : return -1
-        self.pressed = False
-
-        if not self.rect.collidepoint(event.pos): return self.layer
-        #if not toplayer == -1: return -1
-        if not self.rect.collidepoint(event.pos): return -1
         if not event.button == 1 : return self.layer
-        if not self.enabled : return self.layer        
+        if not self.enabled : return self.layer
+        
+        self.pressed = False
+        if not self.rect.collidepoint(event.pos): return self.layer
         
         self.onMouseButtonUp(event)
 
