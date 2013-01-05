@@ -9,12 +9,10 @@ class Screen(gui.Base):
         self.rect = size
         self.fps = 30
         self.clock = pygame.time.Clock()
+        self.fill ( (255, 255, 255) )
 
         gui.def_surf = self
         self._gui_items = pygame.sprite.LayeredUpdates()
-    
-    def __hash__ (self):
-        return hash(id(self))
         
     def _onMouseButtonUp (self, event, layer):
         if not layer == -1: return -1
@@ -49,7 +47,7 @@ class Screen(gui.Base):
         return -1
         
     def onUpdate (self, event):
-        self.fill((255, 255, 255))
+        pass
 
     def update (self, *args, **kwargs):
         self._gui_items.update(*args, **kwargs)
@@ -57,4 +55,15 @@ class Screen(gui.Base):
 ##  Drawing shortcuts
     blit   = gui.Shortcut ("image.blit")
     fill   = gui.Shortcut ("image.fill")
+    copy   = gui.Shortcut ("image.copy")
+    scroll = gui.Shortcut ("image.scroll")
+    lock   = gui.Shortcut ("image.lock")
+    unlock = gui.Shortcut ("image.unlock")
+
+    set_at = gui.Shortcut ("image.set_at")
+    get_at = gui.Shortcut ("image.get_at")
+    
+    subsurface = gui.Shortcut ("image.subsurface")
+    getsurface = gui.Shortcut ("image")
+    
 
