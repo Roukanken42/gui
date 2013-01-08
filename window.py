@@ -16,7 +16,7 @@ class Window (gui.Base, gui.template.Movable) :
         self.d_rect = pygame.rect.Rect (1, 20, self.size[0] + 1, self.size[1]+20)
         self.rect   = pygame.rect.Rect (0,  0, self.size[0] + 2, self.size[1]+21)
         self.rect.topleft = (20, 50)
-        self.font = pygame.font.Font("Vera.ttf", 12)
+        self.font = pygame.font.Font(gui.resource("Vera.ttf"), 12)
         self.fontrect = pygame.rect.Rect(10, 4, 42, 47)
 
         
