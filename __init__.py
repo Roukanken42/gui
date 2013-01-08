@@ -3,6 +3,11 @@ import gui.event, pygame, sys, collections, types, os
 def_surf = None
 path = os.path.dirname(gui.__file__)
 
+
+def resource (filename):
+    return os.path.join (path, "resources", filename)
+
+
 def _get (obj, name):
     if len(name) == 1: return getattr(obj, name[0])
     return _get(getattr(obj, name[0]), name[1:])

@@ -24,7 +24,7 @@ class Button (gui.Base, gui.template.Movable):
         self._caption = type(self).__name__
         self.graphic = DEFAULT_GRAPHIC
         
-        self._font = pygame.font.Font("Vera.ttf", 12)
+        self._font = pygame.font.Font(gui.resource("Vera.ttf"), 12)
 
         self._visible = True
         self._pressed = False
