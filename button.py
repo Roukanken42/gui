@@ -21,14 +21,14 @@ class Button (gui.Base, gui.template.Movable):
         gui.Base.__init__(self, parent, layer = layer)
         gui.template.Movable.__init__(self, pygame.rect.Rect(0, 0, 150, 50))
 
-        self._caption = type(self).__name__
-        self.graphic = DEFAULT_GRAPHIC
+        self._gui_items = pygame.sprite.LayeredUpdates()
         
-        self._font = pygame.font.Font(gui.resource("Vera.ttf"), 12)
-
-        self._visible = True
-        self._pressed = False
-        self._enabled = True
+        self.graphic = DEFAULT_GRAPHIC
+        self.label = gui.label.Label (parent=self)
+        
+        self.visible = True
+        self.pressed = False
+        self.enabled = True
 
         self.changed = True
 
@@ -41,18 +41,18 @@ class Button (gui.Base, gui.template.Movable):
         self.image = pygame.surface.Surface(self.rect.size)
         self.image.blit(self.graphic[self.getState()].copy(), self.image.get_rect())
 
-        text = self.font.render(self.caption, True, (0, 0, 0))              #TODO >> color
-        textrect = text.get_rect()
-        textrect.center = self.image.get_rect().center
+        self.label.center = self.image.get_rect().center
+        self._gui_items.draw(self.image)
         
-        self.image.blit(text, textrect)
         if not self.visible:
             self.image.fill ((255, 255, 255))
             self.image.set_colorkey ((255, 255, 255))
 
     def update (self, *args, **kwargs):
         """Update and Draw hook"""
+        self._gui_items.update()
         if (self.changed): self.update_img()
+        
     
     def getState (self) :
         if not self.enabled: return STATE_DISABLED
@@ -96,8 +96,12 @@ class Button (gui.Base, gui.template.Movable):
         pass
     
 ##  Shorcuts for updating
-    caption = gui.Shortcut ("_caption")
-    visible = gui.Shortcut ("_visible")
-    pressed = gui.Shortcut ("_pressed")
-    enabled = gui.Shortcut ("_enabled")
-    font    = gui.Shortcut ("_font")
+    caption   = gui.Shortcut ("label.caption")
+    visible   = gui.Shortcut ("_visible")
+    pressed   = gui.Shortcut ("_pressed")
+    enabled   = gui.Shortcut ("_enabled")
+    font      = gui.Shortcut ("label.font")
+    text      = gui.Shortcut ("label.text")
+    textcolor = gui.Shortcut ("1abel.color")
+
+    
