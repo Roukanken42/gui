@@ -76,6 +76,7 @@ def loop ():
         update()
         
 import gui.template
+import gui.label
 import gui.screen
 import gui.button
 import gui.window
