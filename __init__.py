@@ -69,7 +69,8 @@ def update (*args, **kwargs) :
 def loop ():
     while(True):
         update()
-
+        
+import gui.template
 import gui.screen
 import gui.button
 import gui.window

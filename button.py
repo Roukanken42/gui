@@ -14,14 +14,14 @@ DEFAULT_GRAPHIC[STATE_DISABLED].fill((150, 50, 50))
 DEFAULT_GRAPHIC[STATE_PRESSED ].fill((255, 100, 0))
 
 
-class Button (gui.Base):
+class Button (gui.Base, gui.template.Movable):
 
     def __init__ (self, parent = None, layer = 100):
         """Button constructor"""
         gui.Base.__init__(self, parent, layer = layer)
+        gui.template.Movable.__init__(self, pygame.rect.Rect(0, 0, 150, 50))
 
         self._caption = type(self).__name__
-        self._rect = pygame.rect.Rect(0, 0, 150, 50)
         self.graphic = DEFAULT_GRAPHIC
         
         self._font = pygame.font.Font("Vera.ttf", 12)
@@ -94,33 +94,6 @@ class Button (gui.Base):
 
     def onDrag (self, event):
         pass
-
-##  Shortcuts for positioning and moving (aka. rect modifying)
-    rect = gui.Shortcut ("_rect")
-    
-    bottomleft  = gui.Shortcut ("rect.bottomleft")
-    topleft     = gui.Shortcut ("rect.topleft")
-    bottomright = gui.Shortcut ("rect.bottomright")
-    topright    = gui.Shortcut ("rect.topright")
-
-    midbottom = gui.Shortcut ("rect.midbottom")
-    midtop    = gui.Shortcut ("rect.midtop")
-    midleft   = gui.Shortcut ("rect.midleft")
-    midright  = gui.Shortcut ("rect.midright")
-
-    centerx = gui.Shortcut ("rect.centerx")
-    centery = gui.Shortcut ("rect.centery")
-    height  = gui.Shortcut ("rect.height")
-    width   = gui.Shortcut ("rect.width")
-    
-    bottom = gui.Shortcut ("rect.bottom")
-    left   = gui.Shortcut ("rect.left")
-    right  = gui.Shortcut ("rect.right")
-    top    = gui.Shortcut ("rect.top")
-    center = gui.Shortcut ("rect.center")
-    size   = gui.Shortcut ("rect.size")
-
-    move = gui.Shortcut ("rect.move")
     
 ##  Shorcuts for updating
     caption = gui.Shortcut ("_caption")

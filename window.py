@@ -5,7 +5,7 @@ BTN_CLOSE_GRAPHIC = {gui.button.STATE_NORMAL : pygame.image.load(path.join(gui.p
                      gui.button.STATE_PRESSED: pygame.image.load(path.join(gui.path, "resources/close_button_pressed.png"))
                      }
 
-class Window (gui.Base) :
+class Window (gui.Base, gui.template.Movable) :
     def __init__ (self, size, parent = None, layer = 1000):
         gui.Base.__init__(self, parent, layer)
 
@@ -99,5 +99,4 @@ class Window (gui.Base) :
     def size(self):
         return self._size
 
-    def blit (self, source, dest, area=None, special_flags = 0):
-        self.display.blit(source, dest, area, special_flags)
+    blit = gui.Shortcut ("image.blit")
