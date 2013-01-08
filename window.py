@@ -1,7 +1,8 @@
 import pygame, gui
+import os.path as path
 
-BTN_CLOSE_GRAPHIC = {gui.button.STATE_NORMAL : pygame.image.load("C:/Python32/MyLibs/gui/resources/close_button_normal.png"),
-                     gui.button.STATE_PRESSED: pygame.image.load("C:/Python32/MyLibs/gui/resources/close_button_pressed.png")
+BTN_CLOSE_GRAPHIC = {gui.button.STATE_NORMAL : pygame.image.load(path.join(gui.path, "resources/close_button_normal.png")),
+                     gui.button.STATE_PRESSED: pygame.image.load(path.join(gui.path, "resources/close_button_pressed.png"))
                      }
 
 class Window (gui.Base) :

@@ -1,11 +1,12 @@
-import gui, pygame
+import gui, pygame, sys
 
 class Screen(gui.Base):
-    def __init__ (self, size):
+    def __init__ (self, size=(0,0), flags=0, depth=0):
         self.layer = 0
         pygame.init()
 
-        self.image = pygame.display.set_mode (size)
+        pygame.display.set_mode (size, flags, depth)
+        self.image = pygame.display.get_surface()
         self.rect = size
         self.fps = 30
         self.clock = pygame.time.Clock()

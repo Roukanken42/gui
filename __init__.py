@@ -1,6 +1,7 @@
-import gui.event, pygame, sys, collections, types
+import gui.event, pygame, sys, collections, types, os
 
 def_surf = None
+path = os.path.dirname(gui.__file__)
 
 def _get (obj, name):
     if len(name) == 1: return getattr(obj, name[0])
