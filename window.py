@@ -9,16 +9,16 @@ class Window (gui.Base, gui.template.Movable) :
     def __init__ (self, size, parent = None, layer = 1000):
         gui.Base.__init__(self, parent, layer)
 
-        self.title  = "New window"
         self._size   = size
 
         self._gui_items = pygame.sprite.LayeredUpdates()
         self.d_rect = pygame.rect.Rect (1, 20, self.size[0] + 1, self.size[1]+20)
         self.rect   = pygame.rect.Rect (0,  0, self.size[0] + 2, self.size[1]+21)
         self.rect.topleft = (20, 50)
-        self.font = pygame.font.Font(gui.resource("Vera.ttf"), 12)
-        self.fontrect = pygame.rect.Rect(10, 4, 42, 47)
-
+        
+        self.label = gui.label.Label (parent=self)
+        self.label.topleft = (10, 4)
+        self.title = "New " + type(self).__name__
         
         self.display = pygame.surface.Surface(self.size)
         self.image   = pygame.surface.Surface(self.rect.size)
@@ -88,10 +88,7 @@ class Window (gui.Base, gui.template.Movable) :
     def update (self, *args, **kwargs):
         self.image.fill ((170, 170, 170))
         self.image.blit (self.display, self.d_rect)
-        self.__title = self.font.render (self.title, False, (0, 0, 0))
-        self.fontrect.size = self.__title.get_rect().size
-        self.image.blit (self.__title, self.fontrect)
-
+        
         self._gui_items.update (*args, **kwargs)
         self._gui_items.draw (self.image)
         
@@ -99,4 +96,5 @@ class Window (gui.Base, gui.template.Movable) :
     def size(self):
         return self._size
 
-    blit = gui.Shortcut ("image.blit")
+    blit  = gui.Shortcut ("image.blit")
+    title = gui.Shortcut ("label.text")
