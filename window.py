@@ -96,5 +96,5 @@ class Window (gui.Base, gui.template.Movable) :
     def size(self):
         return self._size
 
-    blit  = gui.Shortcut ("image.blit")
+    blit  = gui.Shortcut ("display.blit")
     title = gui.Shortcut ("label.text")

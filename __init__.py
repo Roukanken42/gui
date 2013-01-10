@@ -41,7 +41,7 @@ def membermethod (obj):
         return func    
     return add
 
-class Base (pygame.sprite.Sprite):
+class Base (pygame.sprite.DirtySprite):
     def __init__ (self, parent = None, layer = 100):
         self.layer = layer
         self.parent = parent
@@ -52,9 +52,6 @@ class Base (pygame.sprite.Sprite):
         #gui.event.regListen(self)
         pygame.sprite.Sprite.__init__(self)
         self.parent._gui_items.add (self, layer= self.layer)
-
-    def delete (self):
-        gui.event.delListen(self)
 
     def changeattr (self, **kwargs):
         for name, value in kwargs.items():

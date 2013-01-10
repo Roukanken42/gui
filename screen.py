@@ -1,13 +1,13 @@
 import gui, pygame, sys
 
-class Screen(gui.Base):
+class Screen(gui.Base, gui.template.Movable):
     def __init__ (self, size=(0,0), flags=0, depth=0):
         self.layer = 0
         pygame.init()
 
         pygame.display.set_mode (size, flags, depth)
         self.image = pygame.display.get_surface()
-        self.rect = size
+        self.rect = pygame.rect.Rect((0, 0), size)
         self.fps = 30
         self.clock = pygame.time.Clock()
         self.fill ( (255, 255, 255) )
@@ -66,5 +66,3 @@ class Screen(gui.Base):
     
     subsurface = gui.Shortcut ("image.subsurface")
     getsurface = gui.Shortcut ("image")
-    
-
