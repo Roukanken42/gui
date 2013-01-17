@@ -11,6 +11,8 @@ class Screen(gui.Base, gui.template.Movable):
         self.fps = 30
         self.clock = pygame.time.Clock()
         self.fill ( (255, 255, 255) )
+        self.frameskip = 1
+        self.count = 0
 
         gui.def_surf = self
         self._gui_items = pygame.sprite.LayeredUpdates()
@@ -45,9 +47,17 @@ class Screen(gui.Base, gui.template.Movable):
 
     def _onUpdate (self, event, toplayer):
         self.onUpdate(event)
+        self.count += 1
+
+        for _ in range(self.frameskip):
+                self.onSkipUpdate(event)
+
         return -1
         
     def onUpdate (self, event):
+        pass
+
+    def onSkipUpdate (self, event):
         pass
 
     def update (self, *args, **kwargs):
