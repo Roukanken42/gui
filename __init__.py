@@ -73,6 +73,7 @@ def loop ():
         update()
         
 import gui.template
+import gui.image
 import gui.label
 import gui.screen
 import gui.button
