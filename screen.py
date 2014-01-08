@@ -16,11 +16,18 @@ class Screen(gui.Base, gui.template.Movable):
 
         gui.def_surf = self
         self._gui_items = pygame.sprite.LayeredUpdates()
-        
+
+    def _onKeyDown (self, event, layer):
+        self.onKeyDown (event)
+        return -1
+
+    def onKeyDown (self, event):
+        pass
+    
     def _onMouseButtonUp (self, event, layer):
         if not layer == -1: return -1
         self.onMouseButtonUp (event)
-
+    
     def onMouseButtonUp (self, event):
         pass
     
@@ -76,3 +83,4 @@ class Screen(gui.Base, gui.template.Movable):
     
     subsurface = gui.Shortcut ("image.subsurface")
     getsurface = gui.Shortcut ("image")
+    get_rect   = gui.Shortcut ("image.get_rect")

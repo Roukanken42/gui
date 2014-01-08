@@ -8,10 +8,6 @@ def resource (filename):
     return os.path.join (path, "resources", filename)
 
 
-def _get (obj, name):
-    if len(name) == 1: return getattr(obj, name[0])
-    return _get(getattr(obj, name[0]), name[1:])
-
 def _set (obj, name, value):
     if len(name) == 1:
         setattr(obj, name[0], value)
@@ -25,21 +21,18 @@ class Shortcut:
         self.name = name.split(".")
 
     def __get__ (self, obj, objtype=None):
-        return _get (obj, self.name)
+        for name in self.name:
+            obj = getattr(obj, name)
+
+        return obj
 
     def __set__ (self, obj, value):
-        _set(obj, self.name, value)
-        obj.changed = True
+        for i, name in enumerate(self.name):
+            if (i == len(self.name) -1): break
+            
+            obj = getattr(obj, name)
 
-
-
-def membermethod (obj):
-    def add (func):
-        boundmethod = types.MethodType(func, obj)
-        obj.__setattr__(func.__name__, boundmethod)
-        
-        return func    
-    return add
+        setattr(obj, self.name[-1], value)
 
 class Base (pygame.sprite.DirtySprite):
     def __init__ (self, parent = None, layer = 100):
@@ -57,6 +50,11 @@ class Base (pygame.sprite.DirtySprite):
         for name, value in kwargs.items():
             if (hasattr(self, name)):
                 setattr (self, name, value)
+
+    def event (self, func): 
+        boundmethod = types.MethodType(func, self)
+        self.__setattr__(func.__name__, boundmethod)
+
 
 
 def update (*args, **kwargs) :
@@ -78,3 +76,4 @@ import gui.label
 import gui.screen
 import gui.button
 import gui.window
+import gui.choice
